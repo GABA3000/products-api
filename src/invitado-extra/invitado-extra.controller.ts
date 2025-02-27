@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe } from '@nestjs/common';
 import { InvitadoExtraService } from './invitado-extra.service';
 import { CreateInvitadoExtraDto } from './dto/create-invitado-extra.dto';
 import { UpdateInvitadoExtraDto } from './dto/update-invitado-extra.dto';
@@ -22,13 +22,21 @@ export class InvitadoExtraController {
     return this.invitadoExtraService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateInvitadoExtraDto: UpdateInvitadoExtraDto) {
-    return this.invitadoExtraService.update(+id, updateInvitadoExtraDto);
+  @Put(':id')
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() data: UpdateInvitadoExtraDto
+  ) {
+    return this.invitadoExtraService.update(id, data);
   }
+  
 
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.invitadoExtraService.remove(+id);
   }
+
+
+
+  
 }

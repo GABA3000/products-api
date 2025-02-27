@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe } from '@nestjs/common';
 import { InvitadosService } from './invitado.service';
 import { CreateInvitadoDto } from './dto/create-invitado.dto';
 import { UpdateInvitadoDto } from './dto/update-invitado.dto';
@@ -22,9 +22,9 @@ export class InvitadosController {
     return this.invitadosService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateInvitadoDto: UpdateInvitadoDto) {
-    return this.invitadosService.update(+id, updateInvitadoDto);
+  @Put(':id')
+  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateInvitadoDto) {
+    return this.invitadosService.update(id, data);
   }
 
   @Delete(':id')

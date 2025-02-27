@@ -8,6 +8,6 @@ import { Invitado } from './entities/invitado.entity';
   imports: [TypeOrmModule.forFeature([Invitado])],
   controllers: [InvitadosController],
   providers: [InvitadosService],
-  exports: [InvitadosService],
+  exports: [InvitadosService, TypeOrmModule],
 })
 export class InvitadosModule {}

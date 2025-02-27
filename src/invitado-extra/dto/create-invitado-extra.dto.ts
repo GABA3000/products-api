@@ -1,4 +1,11 @@
+import { IsInt, IsNotEmpty, IsString } from 'class-validator';
+
 export class CreateInvitadoExtraDto {
-    nombre: string;
-    id_invitado: number;
-  } 
+  @IsNotEmpty()
+  @IsString()
+  nombre: string;
+
+  @IsNotEmpty()
+  @IsInt()
+  invitadoId: number;
+}
